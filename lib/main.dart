@@ -1,6 +1,7 @@
 import 'package:codefactory_go_router/screen/1_screen.dart';
 import 'package:codefactory_go_router/screen/2_screen.dart';
 import 'package:codefactory_go_router/screen/3_screen.dart';
+import 'package:codefactory_go_router/screen/error_screen.dart';
 import 'package:codefactory_go_router/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -14,6 +15,7 @@ class _App extends StatelessWidget {
 
   GoRouter get _router => GoRouter(
     initialLocation: '/',
+    errorBuilder: (context, state) => ErrorScreen(error: state.error.toString()),
     routes: <RouteBase>[
       GoRoute(
         path: '/',

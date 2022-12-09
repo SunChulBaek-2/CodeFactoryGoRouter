@@ -12,6 +12,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultLayout(
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           ElevatedButton(
               onPressed: () {
@@ -27,9 +28,9 @@ class HomeScreen extends StatelessWidget {
           ),
           ElevatedButton(
               onPressed: () {
-                context.goNamed(ThreeScreen.routeName);
+                context.go('/error');
               },
-              child: Text('Screen Three (GO)')
+              child: Text('Error Screen (GO)')
           ),
         ],
       )
