@@ -1,3 +1,4 @@
+import 'package:codefactory_go_router/screen/1_screen.dart';
 import 'package:codefactory_go_router/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -10,17 +11,22 @@ class _App extends StatelessWidget {
   const _App({Key? key}) : super(key: key);
 
   GoRouter get _router => GoRouter(
-      initialLocation: '/',
-      routes: [
-        GoRoute(path: '/', builder: (context, state) => const HomeScreen())
-      ]);
+    initialLocation: '/',
+    routes: <RouteBase>[
+      GoRoute(
+        path: '/',
+        builder: (context, state) => const HomeScreen(),
+        routes: <RouteBase>[
+          GoRoute(
+            path: 'one',
+            builder: (context, state) => const OneScreen(),
+          )
+        ]
+      ),
+    ]);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routeInformationProvider: _router.routeInformationProvider,
-      routeInformationParser: _router.routeInformationParser,
-      routerDelegate: _router.routerDelegate,
-    );
+    return MaterialApp.router(routerConfig: _router);
   }
 }
