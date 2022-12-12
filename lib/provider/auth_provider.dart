@@ -15,7 +15,7 @@ final routerProvider = Provider<GoRouter>((ref) {
   final authStateProvider = AuthNotifier(ref: ref);
 
   return GoRouter(
-    initialLocation: '/',
+    initialLocation: '/login',
     errorBuilder: (context, state) => ErrorScreen(error: state.error.toString()),
     // redirect
     redirect: authStateProvider._redirectLogic,
@@ -75,7 +75,10 @@ class AuthNotifier extends ChangeNotifier {
         ),
       ]
     ),
-    GoRoute(path: '/login', builder: (_, state) => LoginScreen())
+    GoRoute(
+      path: '/login',
+      builder: (_, state) => LoginScreen()
+    )
   ];
 }
 
