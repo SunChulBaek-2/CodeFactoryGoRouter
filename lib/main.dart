@@ -1,51 +1,17 @@
-import 'package:codefactory_go_router/screen/1_screen.dart';
-import 'package:codefactory_go_router/screen/2_screen.dart';
-import 'package:codefactory_go_router/screen/3_screen.dart';
-import 'package:codefactory_go_router/screen/error_screen.dart';
-import 'package:codefactory_go_router/screen/home_screen.dart';
+import 'package:codefactory_go_router/provider/auth_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(const _App());
+  runApp(const ProviderScope(child: _App()));
 }
 
-class _App extends StatelessWidget {
+class _App extends ConsumerWidget {
   const _App({Key? key}) : super(key: key);
 
-  GoRouter get _router => GoRouter(
-    initialLocation: '/',
-    errorBuilder: (context, state) => ErrorScreen(error: state.error.toString()),
-    routes: <RouteBase>[
-      GoRoute(
-        path: '/',
-        builder: (context, state) => const HomeScreen(),
-        routes: <RouteBase>[
-          GoRoute(
-            path: 'one',
-            name: OneScreen.routeName,
-            builder: (context, state) => const OneScreen(),
-            routes: <RouteBase>[
-              GoRoute(
-                path: 'two',
-                name: TwoScreen.routeName,
-                builder: (context, state) => const TwoScreen(),
-                routes: <RouteBase>[
-                  GoRoute(
-                    path: 'three',
-                    name: ThreeScreen.routeName,
-                    builder: (context, state) => const ThreeScreen(),
-                  ),
-                ]
-              ),
-            ]
-          ),
-        ]
-      ),
-    ]);
-
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp.router(routerConfig: _router);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(routerProvider);
+    return MaterialApp.router(routerConfig: router);
   }
 }
